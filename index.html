@@ -173,7 +173,16 @@
       console.trace();
     });
     errorBtns[13].addEventListener('click',()=>{
-      console.trace();
+      let deep = ()=>{
+        deeper();
+      }
+      let deeper = ()=>{
+        deepest();
+      }
+      let deepest = ()=>{
+        console.trace();
+      }
+      deep();
     });
     errorBtns[14].addEventListener('click',()=>{
       fetch(undefined_123);
