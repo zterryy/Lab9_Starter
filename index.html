@@ -5,6 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+  window.TrackJS && TrackJS.install({ 
+    token: "634a1e56e5dd45dab8be103f236099c5"
+    // for more configuration options, see https://docs.trackjs.com
+  });
+</script>
+                        
   <title>Lab 9</title>
 
   <style>
@@ -69,7 +77,7 @@
     </form>
 
     <section id="error-btns">
-      <button>Console Log</button>
+      <button id = '1'>Console Log</button>
       <button>Console Error</button>
       <button>Console Count</button>
       <button>Console Warn</button>
@@ -89,19 +97,115 @@
 
   <script>
     let form = document.querySelector('form');
+    let count =0;
     form.addEventListener('submit', e => {
       e.preventDefault();
       let output = document.querySelector('output');
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      try{
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      }
+      catch(err){
+        console.error("Invalid or Unexpected token");
+      }
+      
     });
+
+    
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
     // Start your code here
     // You may move this JS to another file if you wish
+    // console.log('Console Log Demo');
+    // document.querySelector('button').onclick = function (){
+    //   console.log('abc');
+    // };
+    
+    errorBtns[0].addEventListener('click',()=>{
+      console.log("Console Log Demo");
+    });
+    errorBtns[1].addEventListener('click',()=>{
+      console.error('Console Err Demo');
+      
+    });
+    errorBtns[2].addEventListener('click',()=>{
+      count++;
+      console.count('Count Button');
+    });
+    errorBtns[3].addEventListener('click',()=>{
+      console.warn("Console Warn Button");
+    });
+    errorBtns[4].addEventListener('click',()=>{
+      let a = 3;
+      let number = 4;
+      let errMsg = 'number does not equal to 3';
+      
+      console.assert(a==number, {number,errMsg});
+    });
+    errorBtns[5].addEventListener('click',()=>{
+      console.clear();
+    });
+    errorBtns[6].addEventListener('click',()=>{
+      console.dir(errorBtns[6]);
+    });
+    errorBtns[7].addEventListener('click',()=>{
+      console.dirxml(errorBtns[7]);
+    });
+    errorBtns[8].addEventListener('click',()=>{
+      console.group();
+    });
+    errorBtns[9].addEventListener('click',()=>{
+      console.groupEnd();
+    });
+    errorBtns[10].addEventListener('click',()=>{
+      console.table(["apples", "oranges", "bananas"]);
+    });
+    errorBtns[11].addEventListener('click',()=>{
+      console.time('timer button');
+    });
+    errorBtns[12].addEventListener('click',()=>{
+      console.timeEnd('timer button');
+    });
+    errorBtns[13].addEventListener('click',()=>{
+      console.trace();
+    });
+    errorBtns[13].addEventListener('click',()=>{
+      console.trace();
+    });
+    errorBtns[14].addEventListener('click',()=>{
+      fetch(undefined_123);
+      let msg = 'number does not equal to 3';
+      window.onerror(msg);
+    });
+
+    class fetchErr extends Error{
+      constructor(message) {
+        super(message); 
+        this.name = "fetch error"; // (2)
+      }
+    }
+    try{
+      throw new fetchErr('fetchErr thrown');
+    }
+    catch(err){
+     console.error(err);
+    }
+    try {
+        setTimeout(function() {
+          nullVar;
+        }, 1);
+      } 
+      catch (err) {
+        console.error( "nullVar is undifined" );
+      }
+      finally{
+        console.log('after try catch');
+      }
+      TrackJS.track('Testing TrackJS!');
+                        
   </script>
 </body>
 
