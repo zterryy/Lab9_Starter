@@ -202,18 +202,17 @@
     catch(err){
      console.error(err);
     }
+    
     try {
-        setTimeout(function() {
-          nullVar;
-        }, 1);
-      } 
-      catch (err) {
-        console.error( "nullVar is undifined" );
-      }
-      finally{
+        let a = nullVar+1;
+    } 
+    catch (err) {
+        console.log( "nullVar is undifined, error caught" );
+    }
+    finally{
         console.log('after try catch');
-      }
-      TrackJS.track('Testing TrackJS!');
+    }
+    TrackJS.track('Testing TrackJS!');
                         
   </script>
 </body>
